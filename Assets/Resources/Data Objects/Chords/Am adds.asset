@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7830fdf94af0371478568e8cdb8c0f6c, type: 3}
+  m_Name: Am adds
+  m_EditorClassIdentifier: 
+  Name: Am Adds
+  RootNote: A
+  members:
+  - A1
+  - B1
+  - E2
+  - G2
+  - A2
+  - C3
+  - E3
+  - A3
+  - B3
+  - C4
+  - D4
+  - E4
+  - F4
+  - G4
+  - A4
+  - B4
+  - C5
+  - D5
+  chordClips:
+  - {fileID: 8300000, guid: 04ef22bad625455458a2dd441d395206, type: 3}

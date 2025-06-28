@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7830fdf94af0371478568e8cdb8c0f6c, type: 3}
+  m_Name: G Maj
+  m_EditorClassIdentifier: 
+  Name: GM
+  RootNote: G
+  members:
+  - G1
+  - D2
+  - G2
+  - D3
+  - G3
+  - B3
+  - D4
+  - G4
+  - B4
+  - D5
+  chordClips:
+  - {fileID: 8300000, guid: 63a1cd4147097cd488898c9bf000c54d, type: 3}

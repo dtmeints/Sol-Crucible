@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b4227d73f8276a44b6e5253f612d0a2, type: 3}
+  m_Name: Earth and Water.LEVEL
+  m_EditorClassIdentifier: 
+  text1: Fire Doubles Water
+  text2: Water Nurtures Earth
+  color: {r: 1, g: 0.7882353, b: 0.10980392, a: 1}
+  requirements:
+    Randomize: 0
+    TotalToRequire: 0
+    airRequired: 0
+    fireRequired: 0
+    earthRequired: 3
+    waterRequired: 1
+  spawns:
+  - element: 2
+    spawnPoint: 2
+    rank: 5
+  - element: 3
+    spawnPoint: 8
+    rank: 1
+  - element: 1
+    spawnPoint: 5
+    rank: 1
+  wallsPrefab: {fileID: 8046413230248169179, guid: 338baf0fd0dd7b447a981af36ee70d27, type: 3}
+  challengeLevel: 0
