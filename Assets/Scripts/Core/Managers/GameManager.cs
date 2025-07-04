@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
+using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,8 +29,12 @@ public class GameManager : MonoBehaviour
     public Stats Stats { get; private set; }
 
     public static event Action GameOver;
+    
+    void Reset() => CurrentLevel ??= AssetDatabase.LoadAssetAtPath<D_Level>("Assets/Scripts/Core/Levels/Throw Orb.Level.asset");
     private void Awake()
     {
+        CurrentLevel ??= AssetDatabase.LoadAssetAtPath<D_Level>("Assets/Scripts/Core/Levels/Throw Orb.Level.asset");
+        
         if (instance != null && instance != this)
         {
             Destroy(gameObject);
