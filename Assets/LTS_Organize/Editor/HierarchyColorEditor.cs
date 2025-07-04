@@ -92,15 +92,26 @@ internal static class HierarchyColorEditor
             Handles.DrawSolidRectangleWithOutline(new Rect(clip.xMin, row.y, clip.width, row.height), col, Color.clear);
             Handles.EndGUI();
         }
-
+        
         if (go.transform.childCount > 0)
         {
-            arrowStyle ??= new GUIStyle(EditorStyles.foldout) { fixedWidth = 16, fixedHeight = 16 };
-            var fr = new Rect(row.x - 14, row.y + (row.height - 16) * .5f, 16, 16);
-            var d = GUI.depth; GUI.depth = ArrowDepth;
-            var exp = GUI.Toggle(fr, RowExpanded(id), GUIContent.none, arrowStyle);
-            GUI.depth = d;
-            if (exp != RowExpanded(id)) SetRowExpanded(id, exp);
+            bool hasVisibleChildren = false;
+            foreach (Transform child in go.transform) {
+                if (child.gameObject.hideFlags is not HideFlags.HideInHierarchy and not HideFlags.HideAndDontSave) {
+                    hasVisibleChildren = true;
+                    break;
+                }
+            }
+
+            if (hasVisibleChildren) {
+                arrowStyle ??= new GUIStyle(EditorStyles.foldout) { fixedWidth = 16, fixedHeight = 16 };
+                var fr = new Rect(row.x - 14, row.y + (row.height - 16) * .5f, 16, 16);
+                var d = GUI.depth;
+                GUI.depth = ArrowDepth;
+                var exp = GUI.Toggle(fr, RowExpanded(id), GUIContent.none, arrowStyle);
+                GUI.depth = d;
+                if (exp != RowExpanded(id)) SetRowExpanded(id, exp);
+            }
         }
 
         var iconTex = EditorGUIUtility.ObjectContent(go, typeof(GameObject)).image as Texture2D;
