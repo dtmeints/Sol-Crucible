@@ -54,13 +54,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _flowSpeed: 10
+    - _flowSpeed: 2
     - _layer1Tiling: 2
     - _layer2Tiling: 9.09
     - _layer3Tiling: 13.18
     - _tiling: 0.19
     m_Colors:
-    - _BGColor: {r: 0.08886215, g: 0.04444049, b: 0.13207549, a: 0}
-    - _OverlayColor: {r: 0.16890147, g: 0.14010514, b: 0.17610055, a: 1}
+    - _BGColor: {r: 0.23592351, g: 0.20278569, b: 0.2924528, a: 0}
+    - _OverlayColor: {r: 0.31868792, g: 0.21239765, b: 0.3490566, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

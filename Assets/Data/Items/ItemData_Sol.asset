@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4caa49ae5cef458c9f61906e7cf9b32c, type: 3}
+  m_Name: ItemData_Sol
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Sol Crucible
+  <Cost>k__BackingField: 100
+  <Prefab>k__BackingField: {fileID: 6310107219921971358, guid: e37e216a476a6a24693202524d2404c3, type: 3}
+  <Image>k__BackingField: {fileID: 7164798004643246245, guid: da0d5d5e400f37f47a11dbf3c5768291, type: 3}

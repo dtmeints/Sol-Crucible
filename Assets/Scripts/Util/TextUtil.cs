@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public static class TextUtil 
 {
     public static string ToRoman(int number)
