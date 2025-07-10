@@ -23,7 +23,10 @@ public class Crucible : MonoBehaviour
     {
         mpb = new MaterialPropertyBlock();
         visibleCompleteness = 0;
-        SetRequirements(GameManager.Instance.CurrentLevel.Requirements);
+        if (GameManager.Instance != null)
+        {
+            SetRequirements(GameManager.Instance.CurrentLevel.Requirements);
+        }
     }
 
     private void Start()
@@ -33,19 +36,22 @@ public class Crucible : MonoBehaviour
 
     private void Update()
     {
-        if (!GameManager.Instance.GameStarted)
-            return;
-
-        if (GameManager.Instance.GameStarted && GameManager.Instance.GameEnded)
+        if (GameManager.Instance != null)
         {
-            SR.transform.localScale = Vector3.MoveTowards(SR.transform.localScale, Vector3.one * 12, .1f);
-            SR.GetPropertyBlock(mpb);
-            mpb.SetColor("_AddColor", Vector4.MoveTowards(mpb.GetColor("_AddColor"), endColor, .1f));
-            SR.SetPropertyBlock(mpb);
-            return;
-        }
+            if (!GameManager.Instance.GameStarted)
+                return;
 
-        UpdateCompletenessVisuals();
+            if (GameManager.Instance.GameStarted && GameManager.Instance.GameEnded)
+            {
+                SR.transform.localScale = Vector3.MoveTowards(SR.transform.localScale, Vector3.one * 12, .1f);
+                SR.GetPropertyBlock(mpb);
+                mpb.SetColor("_AddColor", Vector4.MoveTowards(mpb.GetColor("_AddColor"), endColor, .1f));
+                SR.SetPropertyBlock(mpb);
+                return;
+            }
+
+            UpdateCompletenessVisuals();
+        }
         
     }
 

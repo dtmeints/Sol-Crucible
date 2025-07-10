@@ -70,4 +70,9 @@ public class InputReader : ScriptableObject, IPlayerActions
             OnPause?.Invoke();
         }
     }
+
+    void IPlayerActions.OnDrag(InputAction.CallbackContext context)
+    {
+        
+    }
 }

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Input Reader
   m_EditorClassIdentifier: 
   mousePosition: {x: 0, y: 0}
-  clickPosition: {x: 0, y: 0}
-  releasePosition: {x: 0, y: 0}
+  clickPosition: {x: 1096.8215, y: 540.80963}
+  releasePosition: {x: 1096.8215, y: 540.80963}
   isHeld: 0

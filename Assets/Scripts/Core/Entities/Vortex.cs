@@ -27,7 +27,7 @@ public class Vortex : MonoBehaviour
 
     private void Awake()
     {
-        readout.element = element.element;
+        if(GameManager.Instance != null)readout.element = element.element;
         symbol.sprite = element.symbol;
         nameReadout.text = element.element.ToString();
         elementAbsorber.elements = new List<Element>() { element.element };
@@ -50,6 +50,8 @@ public class Vortex : MonoBehaviour
 
     private void Start()
     {
+        if (GameManager.Instance == null) return;
+
         if (crucible.Requirements.GetRequiredCountByElement(this.element.element) <= 0)
         {
             chain.GetPropertyBlock(mpb);
@@ -66,14 +68,15 @@ public class Vortex : MonoBehaviour
 
     public void EvaluateCompleted(Requirements requirements)
     {
+        if (GameManager.Instance == null) return;
         if (requirements.CurrentHeldByElement[element.element] >= requirements.GetRequiredCountByElement(element.element))
-        {
-            if (!isComplete)
             {
-                isComplete = true;
-                StartCoroutine(Co_FadeChain(.5f));
+                if (!isComplete)
+                {
+                    isComplete = true;
+                    StartCoroutine(Co_FadeChain(.5f));
+                }
             }
-        }
     }
     private void StartFlash()
     {

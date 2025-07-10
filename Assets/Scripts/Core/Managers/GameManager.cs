@@ -3,7 +3,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
-using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
@@ -30,10 +29,10 @@ public class GameManager : MonoBehaviour
 
     public static event Action GameOver;
     
-    void Reset() => CurrentLevel ??= AssetDatabase.LoadAssetAtPath<D_Level>("Assets/Scripts/Core/Levels/Throw Orb.Level.asset");
+    void Reset() => CurrentLevel = Resources.Load<D_Level>("Data Objects/Levels/ThrowOrb.LEVEL.asset");
     private void Awake()
     {
-        CurrentLevel ??= AssetDatabase.LoadAssetAtPath<D_Level>("Assets/Scripts/Core/Levels/Throw Orb.Level.asset");
+        CurrentLevel = Resources.Load<D_Level>("Data Objects/Levels/ThrowOrb.LEVEL.asset");
         
         if (instance != null && instance != this)
         {
@@ -55,7 +54,10 @@ public class GameManager : MonoBehaviour
 
     public async Task StartLevelInSequence(int levelIndex)
     {
-        await StartLevel(levels[levelIndex]);
+        if (levels[levelIndex] != null)
+        {
+            await StartLevel(levels[levelIndex]);
+        }
     }
 
     public async Task StartLevel(D_Level level)

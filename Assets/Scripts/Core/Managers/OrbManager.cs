@@ -4,17 +4,22 @@ using System.Threading.Tasks;
 
 public class OrbManager : MonoBehaviour
 {
+    public Transform OrbParent;
+
     private static OrbManager instance;
     public static OrbManager Instance
     {
         get
         {
-            if (instance == null)
+            if (instance == null && GameManager.Instance != null)
                 instance = FindAnyObjectByType<OrbManager>();
             return instance;
         }
         private set { return;}
     }
+
+    public bool isActive;
+    public D_Level AllElementsLevel;
 
     private HashSet<Orb> orbs = new();
     [SerializeField] private Transform[] spawnPoints;
@@ -22,7 +27,7 @@ public class OrbManager : MonoBehaviour
     public D_ElementLibrary elementLibrary;
 
     public int Count => orbs.Count;
-    public int MaxOrbCount = 20;
+    public int MaxOrbCount = 40;
     public float OrbLinearDamp = .4f;
     public float OrbResizeSpeed = 4f;
     public float MinimumImpactForce = 2f;
@@ -31,10 +36,25 @@ public class OrbManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null && instance != this)
-            Destroy(gameObject);
-        else
-            instance = this;
+        if (GameManager.Instance != null)
+        {
+            if (instance != null && instance != this)
+                Destroy(gameObject);
+            else
+                instance = this;
+        }
+    }
+
+    public void SetInstance()
+    {
+        instance = this;
+        Instance = instance;
+    }
+
+    public void UnsetInstance()
+    {
+        instance = null;
+        Instance = instance;
     }
 
     private void Start()
@@ -42,11 +62,20 @@ public class OrbManager : MonoBehaviour
         for (int i = 0; i < MaxOrbCount; i++)
         {
             Orb newOrb = (Orb)Instantiate(orbPrefab, transform);
+            newOrb.gameObject.transform.parent = OrbParent;
             pooledOrbs.Add(newOrb);
             newOrb.gameObject.SetActive(false);
         }
-        SpawnOrbs(GameManager.Instance.CurrentLevel.Spawns);
-        _ = MissingElementCheck();
+        if (GameManager.Instance != null)
+        {
+            SpawnOrbs(GameManager.Instance.CurrentLevel.Spawns);
+            _ = MissingElementCheck();
+        }
+        else
+        {
+            SpawnOrbs(AllElementsLevel.Spawns);
+            _ = MissingElementCheck();
+        }
     }
 
 
@@ -54,24 +83,47 @@ public class OrbManager : MonoBehaviour
     {
         await Awaitable.WaitForSecondsAsync(1);
 
-        if (GameManager.Instance.GameEnded)
-            return;
+        if (GameManager.Instance != null)
+        {
 
-        HashSet<Element> elements = new HashSet<Element>();
-        foreach (var orb in pooledOrbs)
-        {
-            if (orb.gameObject.activeInHierarchy)
-                elements.Add(orb.Element);
-        }
-        foreach (var spawn in GameManager.Instance.CurrentLevel.Spawns)
-        {
-            if (!elements.Contains(spawn.element))
+            if (GameManager.Instance.GameEnded)
+                return;
+
+            HashSet<Element> elements = new HashSet<Element>();
+            foreach (var orb in pooledOrbs)
             {
-                Vector2 spawnPoint = await GetRandomSpawnPoint();
-                SpawnOrb(spawn.element, 1, spawnPoint);
+                if (orb.gameObject.activeInHierarchy)
+                    elements.Add(orb.Element);
             }
+            foreach (var spawn in GameManager.Instance.CurrentLevel.Spawns)
+            {
+                if (!elements.Contains(spawn.element))
+                {
+                    Vector2 spawnPoint = await GetRandomSpawnPoint();
+                    SpawnOrb(spawn.element, 1, spawnPoint);
+                }
+            }
+            _ = MissingElementCheck();
+
         }
-        _ = MissingElementCheck();
+        else if(isActive)
+        {
+            HashSet<Element> elements = new HashSet<Element>();
+            foreach (var orb in pooledOrbs)
+            {
+                if (orb.gameObject.activeInHierarchy)
+                    elements.Add(orb.Element);
+            }
+            foreach (var spawn in AllElementsLevel.Spawns)
+            {
+                if (!elements.Contains(spawn.element))
+                {
+                    Vector2 spawnPoint = await GetRandomSpawnPoint();
+                    SpawnOrb(spawn.element, 1, spawnPoint);
+                }
+            }
+            _ = MissingElementCheck();
+        }
     }
 
     public void Register(Orb orb)
@@ -100,6 +152,7 @@ public class OrbManager : MonoBehaviour
         newOrb.gameObject.SetActive(true);
         newOrb.Initialize(element, rank);
         newOrb.transform.position = position;
+        newOrb.gameObject.transform.parent = OrbParent;
         return newOrb;
     }
 

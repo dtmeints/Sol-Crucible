@@ -1,16 +1,11 @@
-﻿using Sirenix.OdinInspector;
+﻿﻿using Sirenix.OdinInspector;
 using UnityEngine;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
 [CreateAssetMenu(fileName = "GameSettings", menuName = "Data/Settings/Game")]
 public class GameSettingsData : ScriptableObject
 {
-    public static readonly string kSettingsPath = "Assets/Data/Settings/GameSettings.asset";
-    #if UNITY_EDITOR
-    public static GameSettingsData LoadDefaultSettings() => AssetDatabase.LoadAssetAtPath<GameSettingsData>(kSettingsPath);
-    #endif
+    public static readonly string kSettingsPath = "Data Objects/GameSettings.asset";
+    public static GameSettingsData LoadDefaultSettings() => Resources.Load<GameSettingsData>(kSettingsPath);
     
     [field: SerializeField, InlineEditor] public CameraSettingsData camera { get; private set; }
     [field: SerializeField, FoldoutGroup("World & Camera")] public float worldSize { get; private set; } = 1000;

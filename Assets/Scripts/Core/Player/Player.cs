@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] InputReader input;
+    //[SerializeField] InputReader input;
+    [SerializeField] Input_Handler input;
+    public Galaxy_Manager GalaxyManager;
     [SerializeField] float maxMagnitude = 3f;
     [SerializeField] float slowDownScale = .1f;
     [SerializeField] DirectionIndicator directionIndicator;
@@ -22,10 +24,10 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (input.isHeld && currentOrb != null)
+        if (input.IsHeld && currentOrb != null)
         {
             directionIndicator.gameObject.SetActive(true);
-            directionIndicator.UpdateLine(currentOrb.transform.position, (Vector3)CurrentPushVector(input.mousePosition));
+            directionIndicator.UpdateLine(currentOrb.transform.position, (Vector3)CurrentPushVector(input.MousePosition));
             Time.timeScale = slowDownScale;
         }
         else
@@ -34,26 +36,38 @@ public class Player : MonoBehaviour
             directionIndicator.gameObject.SetActive(false);
         }
         DoHoverEffect();
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Click(input.MousePosition);
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            Release(input.MousePosition);
+        }
         
     }
-    private void OnEnable()
-    {
-        input.OnClick += Click;
-        input.OnRelease += Release;
-        input.OnPause += TogglePause;
+    // private void OnEnable()
+    // {
+    //     input.OnClick += Click;
+    //     input.OnRelease += Release;
+    //     input.OnPause += TogglePause;
 
-        optionsMenu = FindFirstObjectByType<UIOptionsMenu>(FindObjectsInactive.Include);
-    }
+    //     optionsMenu = FindFirstObjectByType<UIOptionsMenu>(FindObjectsInactive.Include);
+    // }
 
-    private void OnDisable()
-    {
-        input.OnClick -= Click;
-        input.OnRelease -= Release;
-        input.OnPause -= TogglePause;
-    }
+    // private void OnDisable()
+    // {
+    //     input.OnClick -= Click;
+    //     input.OnRelease -= Release;
+    //     input.OnPause -= TogglePause;
+    // }
+
 
     private void Click(Vector2 mousePos)
     {
+        Debug.Log("Click");
         IClickable clickable = GetClickableAtPoint(mousePos);
 
         if (clickable != null)
@@ -65,7 +79,7 @@ public class Player : MonoBehaviour
                 return;
             }
         }
-        
+
         currentOrb = null;
     }
 
@@ -81,7 +95,7 @@ public class Player : MonoBehaviour
     {
         IClickable lastHoveredClickable = hoveredClickable;
 
-        hoveredClickable = GetClickableAtPoint(input.mousePosition);
+        hoveredClickable = GetClickableAtPoint(input.MousePosition);
 
         if (hoveredClickable != null && hoveredClickable is Orb orb)
             OnHover?.Invoke(orb.Element);
@@ -101,11 +115,25 @@ public class Player : MonoBehaviour
 
     private void TryFlingCurrentOrb(Vector2 mousePos)
     {
-        if (currentOrb != null)
+        if (GameManager.Instance != null)
         {
-            currentOrb.Push(CurrentPushVector(mousePos));
-            volitions += 1;
-            GameManager.Instance.Stats.volitionsCast = volitions;
+            if (currentOrb != null)
+            {
+                currentOrb.Push(CurrentPushVector(mousePos));
+                volitions += 1;
+                GameManager.Instance.Stats.volitionsCast = volitions;
+            }
+        }
+        else
+        {
+            if (GalaxyManager.Energy >= GalaxyManager.EnergyPerFling)
+            {
+                if (currentOrb != null)
+                {
+                    currentOrb.Push(CurrentPushVector(mousePos));
+                    GalaxyManager.Fling();
+                }
+            }
         }
     }
 

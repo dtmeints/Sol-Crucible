@@ -3,8 +3,8 @@ guid: c871612609a39b448a066da62f54b82c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7240584738582912127
-    second: Symbol_Earth_copy_1_0
+      213: 2027391220270882162
+    second: Symbol_Earth_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -97,7 +97,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: Android
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -110,7 +110,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: WebGL
+    buildTarget: WindowsStoreApps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -126,7 +126,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Symbol_Earth_copy_1_0
+      name: Symbol_Earth_0
       rect:
         serializedVersion: 2
         x: 0
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f7c595d1579bb7460800000000000000
-      internalID: 7240584738582912127
+      spriteID: 27dddf0c29db22c10800000000000000
+      internalID: 2027391220270882162
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Symbol_Earth_copy_1_0: 7240584738582912127
+      Symbol_Earth_0: 2027391220270882162
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

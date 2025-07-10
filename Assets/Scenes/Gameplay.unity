@@ -11372,6 +11372,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1052926109}
   m_CullTransparentMesh: 1
+--- !u!1 &1080125639
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1080125640}
+  - component: {fileID: 1080125641}
+  m_Layer: 0
+  m_Name: Input Handler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1080125640
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080125639}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1080125641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080125639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd04ca0b6ec0e9a429396319264a2f3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MousePosition: {x: 0, y: 0}
+  ClickPosition: {x: 0, y: 0}
+  ReleasePosition: {x: 0, y: 0}
+  IsHeld: 0
 --- !u!1 &1085836464
 GameObject:
   m_ObjectHideFlags: 0
@@ -22373,7 +22421,7 @@ PrefabInstance:
     - target: {fileID: 3898270108039368359, guid: 29b5953ce9bec104898bb8d1fd79ac3c, type: 3}
       propertyPath: CurrentLevel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: db936fb02e9c2564f908d0eeb56d652c, type: 2}
     - target: {fileID: 5431123153859264143, guid: 29b5953ce9bec104898bb8d1fd79ac3c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1862.0311
@@ -22427,6 +22475,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1362094037792095148, guid: 063c6eb010a7a1b46a53046b69f5bd32, type: 3}
+      propertyPath: input
+      value: 
+      objectReference: {fileID: 1080125641}
     - target: {fileID: 1362094037792095148, guid: 063c6eb010a7a1b46a53046b69f5bd32, type: 3}
       propertyPath: maxMagnitude
       value: 15
@@ -22549,6 +22601,7 @@ SceneRoots:
   - {fileID: 347822469}
   - {fileID: 619394802}
   - {fileID: 1603942531}
+  - {fileID: 1080125640}
   - {fileID: 1583671948781136326}
   - {fileID: 7368438407765326937}
   - {fileID: 1197793504}

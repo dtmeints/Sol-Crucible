@@ -1198,7 +1198,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Free Play
+  m_text: Galaxy
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a642fdb9727fc1146b35b4f2f5099af1, type: 2}
   m_sharedMaterial: {fileID: 3044562297763849637, guid: a642fdb9727fc1146b35b4f2f5099af1, type: 2}
@@ -3063,7 +3063,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c229808af5daaf4c9b14eb18f6b0663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input: {fileID: 11400000, guid: 1fdcd7ff4f508d74c854317b37e23096, type: 2}
+  input: {fileID: 1191705163}
+  GalaxyManager: {fileID: 0}
   maxMagnitude: 3
   slowDownScale: 0.1
   directionIndicator: {fileID: 33147233}
@@ -4223,7 +4224,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Begin
+  m_text: Levels
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a642fdb9727fc1146b35b4f2f5099af1, type: 2}
   m_sharedMaterial: {fileID: 3044562297763849637, guid: a642fdb9727fc1146b35b4f2f5099af1, type: 2}
@@ -6188,7 +6189,7 @@ GameObject:
   - component: {fileID: 916170298}
   - component: {fileID: 916170297}
   m_Layer: 0
-  m_Name: Main Camera (1)
+  m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6625,9 +6626,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1806174533}
-        m_TargetAssemblyTypeName: UIMainMenu, Assembly-CSharp
-        m_MethodName: StartFreePlay
+      - m_Target: {fileID: 1065254573}
+        m_TargetAssemblyTypeName: Galaxy_Starter, Assembly-CSharp
+        m_MethodName: OpenGalaxy
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6675,6 +6676,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 999341375}
   m_CullTransparentMesh: 1
+--- !u!1 &1065254571
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1065254572}
+  - component: {fileID: 1065254573}
+  m_Layer: 0
+  m_Name: Galaxy Starter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1065254572
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065254571}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1065254573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065254571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dd4dcd540f792d4994cfd5f03467f8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1111161109
 GameObject:
   m_ObjectHideFlags: 0
@@ -7249,6 +7294,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1187195072}
   m_CullTransparentMesh: 1
+--- !u!1 &1191705162
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1191705164}
+  - component: {fileID: 1191705163}
+  m_Layer: 0
+  m_Name: Input Handler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1191705163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191705162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd04ca0b6ec0e9a429396319264a2f3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MousePosition: {x: 0, y: 0}
+  ClickPosition: {x: 0, y: 0}
+  ReleasePosition: {x: 0, y: 0}
+  IsHeld: 0
+--- !u!4 &1191705164
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191705162}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1222232375
 GameObject:
   m_ObjectHideFlags: 0
@@ -11504,7 +11597,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
 --- !u!114 &1806174530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13591,6 +13684,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 916170301}
   - {fileID: 675052847}
+  - {fileID: 1065254572}
   - {fileID: 679282502}
   - {fileID: 1631713221}
   - {fileID: 1806174532}
@@ -13602,3 +13696,4 @@ SceneRoots:
   - {fileID: 163238096}
   - {fileID: 1828788992}
   - {fileID: 6237817526061793645}
+  - {fileID: 1191705164}

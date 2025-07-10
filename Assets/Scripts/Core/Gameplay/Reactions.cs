@@ -29,7 +29,7 @@ public static class Reactions
         if (ReactionDict.TryGetValue((orb1.Element, orb2.Element), out var reaction))
         {
             reaction?.Invoke(orb1, orb2);
-            GameManager.Instance.Stats.collisionsMade++;
+            if (GameManager.Instance != null) { GameManager.Instance.Stats.collisionsMade++; }
         }
         return true;
     }

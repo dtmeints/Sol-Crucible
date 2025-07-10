@@ -5,6 +5,8 @@ using TMPro;
 
 public class ElementAbsorber : MonoBehaviour
 {
+    public Inside_Sun_Manager sunManager;
+
     [Header("Settings")]
     [SerializeField] bool allowHighRankToPass;
     public int maxAbsorbableRank = 5;
@@ -38,16 +40,27 @@ public class ElementAbsorber : MonoBehaviour
 
         if (elements.Contains(orb.Element) && crucible)
         {
-            crucible.SatisfyRequirement(orb.Element, orb.Rank);
+            if (GameManager.Instance != null) { crucible.SatisfyRequirement(orb.Element, orb.Rank); }
             OnFedCorrectElement?.Invoke();
         }
-        else 
+        else
         {
             OnFedIncorrectElement?.Invoke();
-            GameManager.Instance.Stats.AddLostElement(orb.Rank, orb.Element);
+            if (GameManager.Instance != null) { GameManager.Instance.Stats.AddLostElement(orb.Rank, orb.Element); }
         }
 
-        orb.BeConsumed(transform);
+        if (GameManager.Instance != null || elements.Count == 0)
+        {
+            orb.BeConsumed(transform);
+            return;
+        }
+
+        if (elements.Contains(orb.Element))
+        {
+            sunManager.AddElemement(orb.Rank, orb.Element);
+            orb.BeConsumed(transform);
+            return;
+        }
     }
 
     public void SetRankLimit(int maxAbsorbableRank)

@@ -100,7 +100,14 @@ public class Orb : MonoBehaviour, IClickable
         destination = null;
         transform.parent = null;
         RB.linearVelocity = Vector2.zero;
-        RB.linearDamping = OrbManager.Instance.OrbLinearDamp;
+        if (GameManager.Instance != null)
+        {
+            RB.linearDamping = OrbManager.Instance.OrbLinearDamp;
+        }
+        else
+        {
+            
+        }
         RB.simulated = true;
         col.isTrigger = false;
         twinOriginal = null;
@@ -133,6 +140,12 @@ public class Orb : MonoBehaviour, IClickable
 
     private void OnEnable()
     {
+        StartCoroutine(enableWait());
+    }   
+
+    IEnumerator enableWait()
+    {
+        yield return new WaitForSeconds(0.01f);
         OrbManager.Instance.Register(this);
     }
     private void OnDisable()
@@ -171,7 +184,7 @@ public class Orb : MonoBehaviour, IClickable
     public void SetRank(int rank)
     {
         if (rank > Rank)
-            GameManager.Instance.Stats.AddCreatedElement(rank - Rank, Element);
+            if (GameManager.Instance != null) { GameManager.Instance.Stats.AddCreatedElement(rank - Rank, Element); }
         
         Rank = rank;
     }
