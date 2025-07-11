@@ -20,7 +20,7 @@ public class Orb : MonoBehaviour, IClickable
 
     [Header("Settings")]
     [SerializeField] Element element;
-    public Element Element { get { return element; } set {  element = value; } }
+    public Element Element { get { return element; } set { element = value; } }
     [SerializeField] float maxImpactSpeed = 5;
     public float resizeSpeed = 4;
     [ColorUsage(true, true), SerializeField] Color flashColorA, flashColorB;
@@ -36,6 +36,8 @@ public class Orb : MonoBehaviour, IClickable
     public int Rank;
     [SerializeField] int visibleRank;
     Transform destination;
+
+    private float distanceTimer;
 
     private void Awake()
     {
@@ -63,6 +65,12 @@ public class Orb : MonoBehaviour, IClickable
             transform.position = Vector2.MoveTowards(transform.position, destination.position, 5 * Time.deltaTime);
 
         CheckIfShouldBeEliminated();
+
+        distanceTimer += Time.deltaTime;
+        if (distanceTimer >= 1f)
+        {
+            CheckDistance();
+        }
     }
 
     private void ManageChainGraphics()
@@ -106,7 +114,7 @@ public class Orb : MonoBehaviour, IClickable
         }
         else
         {
-            
+
         }
         RB.simulated = true;
         col.isTrigger = false;
@@ -141,7 +149,7 @@ public class Orb : MonoBehaviour, IClickable
     private void OnEnable()
     {
         StartCoroutine(enableWait());
-    }   
+    }
 
     IEnumerator enableWait()
     {
@@ -159,7 +167,7 @@ public class Orb : MonoBehaviour, IClickable
         float impactMagnitude = collision.relativeVelocity.magnitude;
         AudioManager.Instance.PlayCollisionSound(impactMagnitude, collision.contacts[0].point);
 
-        if (collision.gameObject.TryGetComponent<Orb>(out var orb) 
+        if (collision.gameObject.TryGetComponent<Orb>(out var orb)
             && Time.time - spawnTime > .5f
             && impactMagnitude > OrbManager.Instance.MinimumImpactForce)
         {
@@ -169,7 +177,7 @@ public class Orb : MonoBehaviour, IClickable
             if (Time.time - LastReactionTime < .1f || Time.time - orb.LastReactionTime < .1f)
                 return;
 
-            
+
             if (Reactions.React(this, orb, collision.relativeVelocity))
                 LastReactionTime = Time.time;
         }
@@ -185,7 +193,7 @@ public class Orb : MonoBehaviour, IClickable
     {
         if (rank > Rank)
             if (GameManager.Instance != null) { GameManager.Instance.Stats.AddCreatedElement(rank - Rank, Element); }
-        
+
         Rank = rank;
     }
 
@@ -251,5 +259,15 @@ public class Orb : MonoBehaviour, IClickable
     void IClickable.ActivateMouseOverEffect()
     {
         StartCoroutine(Co_Flash(.5f));
+    }
+
+
+    void CheckDistance()
+    {
+        if (Vector3.Distance(transform.position, OrbManager.Instance.transform.position) >= 50f)
+        {
+            Debug.Log("Orb out of bounds");
+            SetRank(0);
+        }
     }
 }
