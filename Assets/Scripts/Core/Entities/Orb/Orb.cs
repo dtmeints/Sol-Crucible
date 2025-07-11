@@ -70,6 +70,7 @@ public class Orb : MonoBehaviour, IClickable
         if (distanceTimer >= 1f)
         {
             CheckDistance();
+            distanceTimer = 0;
         }
     }
 
